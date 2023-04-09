@@ -1,38 +1,102 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Roxabi !
 
-## Getting Started
+## What is it ?
+
+Blueprint modules to deploy complete application with :
+
+-   Front end :
+    -   next js
+-   Back end
+    -   node js
+-   IAM :
+    -   To be define
+-   Database :
+    -   Prisma
+-   ELK :
+    -   To be define
+-   Event / notification :
+    -   To be define
+-   Webmail
+    -   To be define
+-   CI / CD :
+    -   To be define
+-   Automated test :
+    -   To be define
+
+## How to start
+
+???
+
+## Benefits of Docker Compose
+
+-   Develop locally without Node.js or TypeScript installed
+-   Easy to run, consistent development environment across macOS, Windows, and Linux teams
+-   Run multiple Next.js apps, databases, and other microservices in a single deployment
+-   Easy configuration with YAML files
+
+## Prerequisites
+
+Install [Docker Desktop](https://docs.docker.com/get-docker) for Mac, Windows, or Linux. Docker Desktop includes Docker Compose as part of the installation.
+
+## Useful commands
+
+```bash
+# Stop all running containers
+docker kill $(docker ps -aq) && docker rm $(docker ps -aq)
+
+# Free space
+docker system prune -af --volumes
+```
+
+# Framework
+
+## Front end
+
+### How to use
+
+Optionally,
+
+```bash
+# Go in app folde
+cd next-app
+#Run `npm install`  to generate a lockfile.
+npm install
+```
+
+It is recommended to commit a lockfile to version control. Although the example will work without one, build errors are more likely to occur when using the latest version of all dependencies. This way, we're always using a known good configuration to develop and run in production.
+
+### Development
 
 First, run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+# Create a network, which allows containers to communicate
+# with each other, by using their container name as a hostname
+docker network create my_network
+
+# Build dev
+docker-compose -f docker-compose.dev.yml build
+
+# Up dev
+docker-compose -f docker-compose.dev.yml up
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### Production
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```bash
+# Create a network, which allows containers to communicate
+# with each other, by using their container name as a hostname
+docker network create my_network
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# Build prod
+docker-compose -f docker-compose.prod.yml build
 
-## Learn More
+# Up prod in detached mode
+docker-compose -f docker-compose.prod.yml up -d
+```
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Open [http://localhost:3000](http://localhost:3000).
